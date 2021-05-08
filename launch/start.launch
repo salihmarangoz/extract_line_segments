@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <param name="use_sim_time" value="true"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find extract_line_segments)/launch/rviz.rviz"/>
+
+    <node name="rosbag" pkg="rosbag" type="play" args="$(find extract_line_segments)/launch/run1.bag --clock -r 3"/>
+
+    <node name="extract_line_segments" pkg="extract_line_segments" type="extract_line_segments_node" output="screen">
+        <param name="douglas_pecker_distance" value="0.1"/>
+        <param name="neighbor_distance" value="0.5"/>
+        <param name="min_cluster_size" value="5"/>
+    </node>
+
+</launch>
